@@ -4,18 +4,7 @@ import myIcon from "../icons/edu.svg";
 import myIcon2 from "../icons/showMore.svg";
 import myIcon3 from "../icons/showLess.svg";
 
-export const eduData = [
-  {
-    id: uuidv4(),
-    name: "Some College",
-    degree: "B.tech in Computer Science",
-    start: "2017-07-01",
-    end: "2021-07-05",
-    location: "MH, India",
-  },
-];
-
-function AddEducation({ onCancel, onConfirm }) {
+function AddEducation({ onCancel, onConfirm, eduData }) {
   const [formData, setFormData] = useState({
     id: uuidv4(),
     name: "",
@@ -89,7 +78,7 @@ function AddEducation({ onCancel, onConfirm }) {
   );
 }
 
-function EditEdu({ onCancel, onConfirm, id }){
+function EditEdu({ onCancel, onConfirm, id, eduData }) {
   let initialExp = 0;
   for (let i = 0; i < eduData.length; i++) {
     if (eduData[i].id === id) {
@@ -184,7 +173,7 @@ function OldEdus({ data, setIndex }) {
   );
 }
 
-export default function Education({ onShow, isActive }) {
+export default function Education({ onShow, isActive, eduData, onUpdate }) {
   const [index, setIndex] = useState(0);
   if (!isActive) {
     return (
@@ -220,6 +209,7 @@ export default function Education({ onShow, isActive }) {
     } else if (index === 1) {
       const handleConfirm = (confirmedData) => {
         eduData.push(confirmedData);
+        onUpdate(eduData);
         console.log(eduData);
         setIndex(0);
       };
@@ -234,10 +224,11 @@ export default function Education({ onShow, isActive }) {
           <AddEducation
             onCancel={() => setIndex(0)}
             onConfirm={handleConfirm}
+            eduData={eduData}
           />
         </div>
       );
-    }else{
+    } else {
       const handleConfirm = (formData, id) => {
         for (let i = 0; i < eduData.length; i++) {
           if (eduData[i].id === id) {
@@ -245,6 +236,7 @@ export default function Education({ onShow, isActive }) {
           }
         }
         console.log(eduData);
+        onUpdate(eduData);
         setIndex(0);
       };
       return (
@@ -259,6 +251,7 @@ export default function Education({ onShow, isActive }) {
             onCancel={() => setIndex(0)}
             onConfirm={handleConfirm}
             id={index}
+            eduData={eduData}
           ></EditEdu>
         </div>
       );

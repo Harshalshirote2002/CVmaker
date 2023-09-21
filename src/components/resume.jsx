@@ -1,11 +1,56 @@
 import phone from "../icons/phone.svg";
 import mail from "../icons/mail.svg";
 import location from "../icons/location.svg";
-// import { personalInfo } from "./personalInfo";
-import { expData } from "./experience";
-import { eduData } from "./education";
 
-export default function ActualResume({ personalInfo }) {
+function AddExps({ expData }) {
+  if (expData.length === 0) {
+    return <></>;
+  } else {
+    return (
+      <>
+        {expData.map((item) => (
+          <div className="experience1" key={item.id}>
+            <div className="resume-experience-duration" key={item.id}>
+              <span className="start">{item.start.slice(0, 7)}</span>-
+              <span className="end">{item.end.slice(0, 7)}</span>
+            </div>
+            <div className="resume-experience-name">{item.name}</div>
+            <div className="resume-experience-title">{item.position}</div>
+            <div className="resume-experience-description">
+              {item.description}
+            </div>
+          </div>
+        ))}
+      </>
+    );
+  }
+}
+
+function AddEdus({ eduData }) {
+  if (eduData.length === 0) {
+    return <></>;
+  } else {
+    return (
+      <>
+        {eduData.map((item) => (
+          <div className="education1" key={item.id}>
+            <div className="resume-education-duration">
+              <span className="start">{item.start.slice(0, 7)}</span>-
+              <span className="end">{item.end.slice(0, 7)}</span>
+            </div>
+            <div className="resume-education-name">{item.name}</div>
+            <div className="resume-education-location">
+              {item.location}
+            </div>
+            <div className="resume-education-title">{item.degree}</div>
+          </div>
+        ))}
+      </>
+    );
+  }
+}
+
+export default function ActualResume({ personalInfo, eduData, expData }) {
   return (
     <div className="output-resume">
       <div className="resume-header">
@@ -24,42 +69,15 @@ export default function ActualResume({ personalInfo }) {
           {personalInfo.address}
         </div>
       </div>
+
       <div className="resume-experience">
         <h3>Experience</h3>
-        <div className="experience1">
-          <div className="resume-experience-duration">
-            <span className="start">{expData[0].start.slice(0, 7)}</span>-
-            <span className="end">{expData[0].end.slice(0, 7)}</span>
-          </div>
-          <div className="resume-experience-name">{expData[0].name}</div>
-          <div className="resume-experience-title">{expData[0].position}</div>
-          <div className="resume-experience-description">
-            {expData[0].description}
-          </div>
-        </div>
-        <div className="experience2">
-          <div className="resume-experience-duration">
-            <span className="start">{expData[1].start.slice(0, 7)}</span>-
-            <span className="end">{expData[1].end.slice(0, 7)}</span>
-          </div>
-          <div className="resume-experience-name">{expData[1].name}</div>
-          <div className="resume-experience-title">{expData[1].position}</div>
-          <div className="resume-experience-description">
-            {expData[1].description}
-          </div>
-        </div>
+        <AddExps expData={expData} />
       </div>
+
       <div className="resume-education">
         <h3>Education</h3>
-        <div className="education1">
-          <div className="resume-education-duration">
-            <span className="start">{eduData[0].start.slice(0, 7)}</span>-
-            <span className="end">{eduData[0].end.slice(0, 7)}</span>
-          </div>
-          <div className="resume-education-name">{eduData[0].name}</div>
-          <div className="resume-education-location">{eduData[0].location}</div>
-          <div className="resume-education-title">{eduData[0].degree}</div>
-        </div>
+        <AddEdus eduData={eduData} />
       </div>
     </div>
   );

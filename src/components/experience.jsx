@@ -4,28 +4,7 @@ import myIcon from "../icons/exp.svg";
 import myIcon2 from "../icons/showMore.svg";
 import myIcon3 from "../icons/showLess.svg";
 
-export const expData = [
-  {
-    id: uuidv4(),
-    name: "Some Company",
-    position: "UI & UX Designer",
-    start: "2022-07-04",
-    end: "2023-02-01",
-    description:
-      "Designed and prototyped user interface patterns for various clients in various industries, ranging from self-service apps within the telecommunications-sector to mobile games for IOS and Android",
-  },
-  {
-    id: uuidv4(),
-    name: "Some Other Company",
-    position: "UX Research Assistant",
-    start: "2022-05-02",
-    end: "2021-10-09",
-    description:
-      "Supported senior researchers on accessibility standards for the open web. Created and usability tested wireframes and prototypes. Produced interactive documentation for quick onboarding of new researchers.",
-  },
-];
-
-function AddExp({ onCancel, onConfirm }) {
+function AddExp({ onCancel, onConfirm, expData }) {
   const [formData, setFormData] = useState({
     id: uuidv4(),
     name: "",
@@ -93,7 +72,7 @@ function AddExp({ onCancel, onConfirm }) {
   );
 }
 
-function EditExp({ onCancel, onConfirm, id }) {
+function EditExp({ onCancel, onConfirm, id, expData }) {
   let initialExp = 0;
   for (let i = 0; i < expData.length; i++) {
     if (expData[i].id === id) {
@@ -182,7 +161,7 @@ function OldExps({ data, setIndex }) {
   );
 }
 
-export default function Experience({ onShow, isActive }) {
+export default function Experience({ onShow, isActive, expData, onUpdate }) {
   const [index, setIndex] = useState(0);
   if (!isActive) {
     return (
@@ -212,6 +191,7 @@ export default function Experience({ onShow, isActive }) {
     } else if (index === 1) {
       const handleConfirm = (confirmedData) => {
         expData.push(confirmedData);
+        onUpdate(expData);
         console.log(expData);
         setIndex(0);
       };
@@ -223,7 +203,11 @@ export default function Experience({ onShow, isActive }) {
             Experience
             <img src={myIcon3} />
           </h3>
-          <AddExp onCancel={() => setIndex(0)} onConfirm={handleConfirm} />
+          <AddExp
+            onCancel={() => setIndex(0)}
+            onConfirm={handleConfirm}
+            expData={expData}
+          />
         </div>
       );
     } else if (index !== 1 || index !== 0) {
@@ -233,6 +217,7 @@ export default function Experience({ onShow, isActive }) {
             expData[i] = formData;
           }
         }
+        onUpdate(expData);
         console.log(expData);
         setIndex(0);
       };
@@ -248,6 +233,7 @@ export default function Experience({ onShow, isActive }) {
             onCancel={() => setIndex(0)}
             onConfirm={handleConfirm}
             id={index}
+            expData={expData}
           ></EditExp>
         </div>
       );

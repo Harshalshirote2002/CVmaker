@@ -1,12 +1,12 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import "../styles/App.css";
 import Info from "./personalInfo.jsx";
 import Experience from "./experience";
 import Education from "./education";
-import DemoResume from "./demoResume";
 import ActualResume from "./resume";
 
-export let personalInfo = {
+let personalInfo = {
   name: "John Doe",
   title: "Software Developer",
   mail: "jondoe@coolmail.com",
@@ -14,13 +14,54 @@ export let personalInfo = {
   address: "london, UK",
 };
 
+let expData = [
+  {
+    id: uuidv4(),
+    name: "Some Company",
+    position: "UI & UX Designer",
+    start: "2022-07-04",
+    end: "2023-02-01",
+    description:
+      "Designed and prototyped user interface patterns for various clients in various industries, ranging from self-service apps within the telecommunications-sector to mobile games for IOS and Android",
+  },
+  {
+    id: uuidv4(),
+    name: "Some Other Company",
+    position: "UX Research Assistant",
+    start: "2022-05-02",
+    end: "2021-10-09",
+    description:
+      "Supported senior researchers on accessibility standards for the open web. Created and usability tested wireframes and prototypes. Produced interactive documentation for quick onboarding of new researchers.",
+  },
+];
+
+let eduData = [
+  {
+    id: uuidv4(),
+    name: "Some College",
+    degree: "B.tech in Computer Science",
+    start: "2017-07-01",
+    end: "2021-07-05",
+    location: "MH, India",
+  },
+];
+
 function OnScreen() {
   const [currentState, setState] = useState(0);
   const [formState, setFormState] = useState(0);
+  const [expState, setExpState] = useState(0);
+  const [eduState, setEduState] = useState(0);
   const handleUpdate = (updatedInfo) => {
     personalInfo = updatedInfo;
-    // console.log(personalInfo)
     setFormState(formState + 1);
+  };
+  const handleEduUpdate = (updatedInfo) => {
+    eduData = updatedInfo;
+    setEduState(eduState + 1);
+  };
+  const handleExpUpdate = (updatedInfo) => {
+    expData = updatedInfo;
+    setExpState(expState + 1);
   };
   return (
     <div className="on-screen">
@@ -34,6 +75,8 @@ function OnScreen() {
               setState(1);
             }
           }}
+          onUpdate={handleExpUpdate}
+          expData={expData}
           isActive={currentState === 1}
         />
         <Education
@@ -44,22 +87,17 @@ function OnScreen() {
               setState(2);
             }
           }}
+          onUpdate={handleEduUpdate}
+          eduData={eduData}
           isActive={currentState === 2}
         />
       </div>
       <div className="output">
-        <ActualResume personalInfo={personalInfo} />
-        {/* <div className="controls">
-          <div className="control control-sync">
-            <img src={sync} onClick={()=>handleUpdate(personalInfo)}/>
-          </div>
-          <div className="control control-reset">
-            <img src={reset} />
-          </div>
-          <div className="control control-print">
-            <img src={print} />
-          </div>
-        </div> */}
+        <ActualResume
+          personalInfo={personalInfo}
+          expData={expData}
+          eduData={eduData}
+        />
       </div>
     </div>
   );
