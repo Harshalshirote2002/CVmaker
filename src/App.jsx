@@ -1,12 +1,7 @@
-import './styles/App.css'
+import OnScreen from "./components/OnScreen";
 
 function App() {
-
-  return (
-    <>
-    <h1>Hello World</h1>
-    </>
-  )
+  return <OnScreen />;
 }
 
-export default App
+export default App;
