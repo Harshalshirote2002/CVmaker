@@ -2,11 +2,11 @@ import { useState } from "react";
 
 export default function Info({ currentState, onUpdate }) {
   const [formData, setFormData] = useState({
-    name: "",
-    title: "",
-    mail: "",
-    phone: "",
-    address: "",
+    name: "John Doe",
+  title: "Software Developer",
+  mail: "jondoe@coolmail.com",
+  phone: "9999999999",
+  address: "london, UK",
   });
   return (
     <div className="input-details">
@@ -18,7 +18,8 @@ export default function Info({ currentState, onUpdate }) {
             onChange={(e) => {
               setFormData({ ...formData, name: e.target.value });
               // personalInfo = formData;
-              onUpdate(formData);
+              // console.log(e.target.value)
+              onUpdate({ ...formData, name: e.target.value });
             }}
             className="input-name"
             id="input-name"
@@ -31,7 +32,7 @@ export default function Info({ currentState, onUpdate }) {
             onChange={(e) => {
               setFormData({ ...formData, title: e.target.value });
               // personalInfo = formData;
-              onUpdate(formData);
+              onUpdate({ ...formData, title: e.target.value });
             }}
             className="input-title"
             id="input-title"
@@ -44,7 +45,7 @@ export default function Info({ currentState, onUpdate }) {
             onChange={(e) => {
               setFormData({ ...formData, mail: e.target.value });
               // personalInfo = formData;
-              onUpdate(formData);
+              onUpdate({ ...formData, mail: e.target.value });
             }}
             className="input-mail"
             id="input-mail"
@@ -57,7 +58,7 @@ export default function Info({ currentState, onUpdate }) {
             onChange={(e) => {
               setFormData({ ...formData, phone: e.target.value });
               // personalInfo = formData;
-              onUpdate(formData);
+              onUpdate({ ...formData, phone: e.target.value });
             }}
             className="input-phone"
             id="input-phone"
@@ -70,7 +71,7 @@ export default function Info({ currentState, onUpdate }) {
             onChange={(e) => {
               setFormData({ ...formData, address: e.target.value });
               // personalInfo = formData;
-              onUpdate(formData);
+              onUpdate({ ...formData, address: e.target.value });
             }}
             className="input-address"
             id="input-address"

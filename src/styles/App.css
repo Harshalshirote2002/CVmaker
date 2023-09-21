@@ -33,11 +33,11 @@
 .on-screen {
   background-color: white;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 10fr;
 }
 
 .input {
-  /* max-width: 400px; */
+  width: 20em;
   background-color: #e5e7eb;
   display: flex;
   flex-direction: column;
@@ -196,6 +196,8 @@ textarea:focus {
   border-radius: var(--input-border-radius);
   padding: 0 4px;
   transition: all 0.2s ease-in-out;
+  position: fixed;
+  top: 50%;
 }
 
 .controls .control:hover {
