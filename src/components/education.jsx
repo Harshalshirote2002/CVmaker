@@ -3,6 +3,8 @@ import { useState } from "react";
 import myIcon from "../icons/edu.svg";
 import myIcon2 from "../icons/showMore.svg";
 import myIcon3 from "../icons/showLess.svg";
+import editIcon from "../icons/edit.svg";
+import deleteIcon from "../icons/delete.svg";
 
 function AddEducation({ onCancel, onConfirm, eduData }) {
   const [formData, setFormData] = useState({
@@ -78,7 +80,7 @@ function AddEducation({ onCancel, onConfirm, eduData }) {
   );
 }
 
-function EditEdu({ onCancel, onConfirm, id, eduData }) {
+function EditEdu({ onCancel, onConfirm, id, eduData, onUpdate }) {
   let initialExp = 0;
   for (let i = 0; i < eduData.length; i++) {
     if (eduData[i].id === id) {
@@ -156,17 +158,24 @@ function EditEdu({ onCancel, onConfirm, id, eduData }) {
   );
 }
 
-function OldEdus({ data, setIndex }) {
+function OldEdus({ data, setIndex, onUpdate }) {
   return (
     <>
       {data.map((item) => (
-        <div
-          key={item.id}
-          id={item.id}
-          onClick={() => setIndex(item.id)}
-          className="education-inactive-section"
-        >
+        <div key={item.id} id={item.id} className="education-inactive-section">
           {item.name}
+          <img src={editIcon} onClick={() => setIndex(item.id)} />
+          <img
+            onClick={() => {
+              for (let i = 0; i < data.length; i++) {
+                if (data[i].id === item.id) {
+                  data.splice(i, 1);
+                  onUpdate(data);
+                }
+              }
+            }}
+            src={deleteIcon}
+          />
         </div>
       ))}
     </>
@@ -194,7 +203,7 @@ export default function Education({ onShow, isActive, eduData, onUpdate }) {
             Education
             <img src={myIcon3} />
           </h3>
-          <OldEdus data={eduData} setIndex={setIndex} />
+          <OldEdus data={eduData} setIndex={setIndex} onUpdate={onUpdate} />
           <div className="add-education">
             <button
               onClick={() => {
@@ -210,7 +219,6 @@ export default function Education({ onShow, isActive, eduData, onUpdate }) {
       const handleConfirm = (confirmedData) => {
         eduData.push(confirmedData);
         onUpdate(eduData);
-        console.log(eduData);
         setIndex(0);
       };
       return (
@@ -235,7 +243,6 @@ export default function Education({ onShow, isActive, eduData, onUpdate }) {
             eduData[i] = formData;
           }
         }
-        console.log(eduData);
         onUpdate(eduData);
         setIndex(0);
       };

@@ -3,6 +3,8 @@ import { useState } from "react";
 import myIcon from "../icons/exp.svg";
 import myIcon2 from "../icons/showMore.svg";
 import myIcon3 from "../icons/showLess.svg";
+import editIcon from "../icons/edit.svg";
+import deleteIcon from "../icons/delete.svg";
 
 function AddExp({ onCancel, onConfirm, expData }) {
   const [formData, setFormData] = useState({
@@ -144,17 +146,24 @@ function EditExp({ onCancel, onConfirm, id, expData }) {
   );
 }
 
-function OldExps({ data, setIndex }) {
+function OldExps({ data, setIndex, onUpdate }) {
   return (
     <>
       {data.map((item) => (
-        <div
-          key={item.id}
-          id={item.id}
-          className="experience-inactive-section"
-          onClick={() => setIndex(item.id)}
-        >
+        <div key={item.id} id={item.id} className="experience-inactive-section">
           {item.name}
+          <img src={editIcon} onClick={() => setIndex(item.id)} />
+          <img
+            src={deleteIcon}
+            onClick={() => {
+              for (let i = 0; i < data.length; i++) {
+                if (data[i].id === item.id) {
+                  data.splice(i, 1);
+                  onUpdate(data);
+                }
+              }
+            }}
+          />
         </div>
       ))}
     </>
@@ -182,7 +191,7 @@ export default function Experience({ onShow, isActive, expData, onUpdate }) {
             Experience
             <img src={myIcon3} />
           </h3>
-          <OldExps data={expData} setIndex={setIndex} />
+          <OldExps data={expData} setIndex={setIndex} onUpdate={onUpdate} />
           <div className="add-experience">
             <button onClick={() => setIndex(1)}>Add Experience</button>
           </div>
@@ -192,7 +201,6 @@ export default function Experience({ onShow, isActive, expData, onUpdate }) {
       const handleConfirm = (confirmedData) => {
         expData.push(confirmedData);
         onUpdate(expData);
-        console.log(expData);
         setIndex(0);
       };
       return (
@@ -218,7 +226,6 @@ export default function Experience({ onShow, isActive, expData, onUpdate }) {
           }
         }
         onUpdate(expData);
-        console.log(expData);
         setIndex(0);
       };
       return (

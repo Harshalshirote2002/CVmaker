@@ -77,20 +77,20 @@ form fieldset {
   font-weight: 700;
 }
 
-.button-entry{
+.button-entry {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
 }
 
-.button-entry button{
+.button-entry button {
   background-color: #e5e7eb;
   width: 80px;
   border-radius: 4px;
 }
 
-.button-entry button:hover{
+.button-entry button:hover {
   cursor: pointer;
 }
 
@@ -347,21 +347,39 @@ textarea:focus {
 
 /* ////////////////////////////////////////////// */
 .experience-inactive-section,
-.education-inactive-section{
+.education-inactive-section {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 10px;
   background-color: white;
   border-radius: var(--input-border-radius);
   font-family: input-head;
   font-size: 1em;
   padding: var(--input-padding-top) var(--input-padding-sidewise);
 }
+.experience-inactive-section img:nth-last-child(2),
+.education-inactive-section img:nth-last-child(2) {
+  margin-left: auto;
+}
+
+.experience-inactive-section img,
+.education-inactive-section img {
+  transition: transform 0.2s ease-in-out;
+}
+
+.experience-inactive-section img:hover,
+.education-inactive-section img:hover {
+  transform: scale(1.2);
+}
 
 .experience-inactive-section:hover,
-.education-inactive-section:hover{
+.education-inactive-section:hover {
   cursor: pointer;
 }
 
 .add-education,
-.add-experience{
+.add-experience {
   display: flex;
   width: 100%;
   align-items: center;
@@ -370,14 +388,14 @@ textarea:focus {
 }
 
 .add-education button::before,
-.add-experience button::before{
+.add-experience button::before {
   content: "+";
   font-weight: 900;
   font-size: 1.3em;
 }
 
 .add-education button,
-.add-experience button{
+.add-experience button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -389,7 +407,7 @@ textarea:focus {
 }
 
 .add-education button:hover,
-.add-experience button:hover{
+.add-experience button:hover {
   cursor: pointer;
 }
 
@@ -401,7 +419,7 @@ textarea:focus {
   .controls {
     display: none;
   }
-  .output{
+  .output {
     padding: 0;
   }
 }
