@@ -3,17 +3,32 @@ import "../styles/App.css";
 import Info from "./personalInfo.jsx";
 import Experience from "./experience";
 import Education from "./education";
-import Resume from "./demoResume";
+import DemoResume from "./demoResume";
+import ActualResume from "./resume";
+// import { personalInfo } from "./personalInfo.jsx";
 import reset from "../icons/reset.svg";
 import sync from "../icons/sync.svg";
 import print from "../icons/print.svg";
 
+export let personalInfo = {
+  name: "John Doe",
+  title: "Software Developer",
+  mail: "jondoe@coolmail.com",
+  phone: "9999999999",
+  address: "london, UK",
+};
+
 function OnScreen() {
   const [currentState, setState] = useState(0);
+  const [formState, setFormState] = useState(0);
+  const handleUpdate = (updatedInfo) => {
+    personalInfo = updatedInfo;
+    setFormState(formState + 1);
+  };
   return (
     <div className="on-screen">
       <div className="input">
-        <Info />
+        <Info currentState={formState} onUpdate={handleUpdate} />
         <Experience
           onShow={() => {
             if (currentState === 1) {
@@ -36,9 +51,9 @@ function OnScreen() {
         />
       </div>
       <div className="output">
-        <Resume />
+        <ActualResume personalInfo={personalInfo} />
         <div className="controls">
-          <div className="control control-sync"> 
+          <div className="control control-sync">
             <img src={sync} />
           </div>
           <div className="control control-reset">

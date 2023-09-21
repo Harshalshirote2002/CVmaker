@@ -390,3 +390,16 @@ textarea:focus {
 .add-experience button:hover{
   cursor: pointer;
 }
+
+@media print {
+  .input {
+    display: none;
+  }
+
+  .controls {
+    display: none;
+  }
+  .output{
+    padding: 0;
+  }
+}

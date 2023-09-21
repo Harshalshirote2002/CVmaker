@@ -2,7 +2,7 @@ import phone from "../icons/phone.svg";
 import mail from "../icons/mail.svg";
 import location from "../icons/location.svg";
 
-export default function Resume() {
+export default function DemoResume() {
   return (
     <div className="output-resume">
       <div className="resume-header">
