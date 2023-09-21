@@ -353,6 +353,11 @@ textarea:focus {
   padding: var(--input-padding-top) var(--input-padding-sidewise);
 }
 
+.experience-inactive-section:hover,
+.education-inactive-section:hover{
+  cursor: pointer;
+}
+
 .add-education,
 .add-experience{
   display: flex;
