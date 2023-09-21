@@ -3,7 +3,15 @@ import myIcon from "../icons/edu.svg";
 import myIcon2 from "../icons/showMore.svg";
 import myIcon3 from "../icons/showLess.svg";
 
-function Section() {
+export const eduData = [{
+  name: "Some College",
+  degree: "B.tech in Computer Science",
+  start: "2017-07-01",
+  end: "2021-07-05",
+  location: "MH, India",
+}];
+
+function AddEducation({onCancel, onConfirm}) {
   return (
     <>
       <div className="entry">
@@ -16,11 +24,19 @@ function Section() {
       </div>
       <div className="entry">
         <label htmlFor="education-start-date">Start Date</label>
-        <input type="date" className="education-start-date" id="education-start-date" />
+        <input
+          type="date"
+          className="education-start-date"
+          id="education-start-date"
+        />
       </div>
       <div className="entry">
         <label htmlFor="education-end-date">End Date</label>
-        <input type="date" className="education-end-date" id="education-end-date" />
+        <input
+          type="date"
+          className="education-end-date"
+          id="education-end-date"
+        />
       </div>
       <div className="entry">
         <label htmlFor="education-location">Location</label>
@@ -30,8 +46,18 @@ function Section() {
   );
 }
 
+function Section({ currentStateActive }) {
+  if (!currentStateActive) {
+    return <div className="education-inactive-section">
+      <h4>Education</h4>
+    </div>;
+  } else {
+    //
+  }
+}
+
 export default function Education({ onShow, isActive }) {
-    const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0);
   if (!isActive) {
     return (
       <h3 onClick={onShow} className="education-head-collapsed">
@@ -42,6 +68,7 @@ export default function Education({ onShow, isActive }) {
       </h3>
     );
   } else {
+    
     return (
       <div className="education-expanded">
         <h3 onClick={onShow} className="education-head-expanded">
@@ -51,7 +78,10 @@ export default function Education({ onShow, isActive }) {
           <img src={myIcon3} />
         </h3>
         <Section currentStateActive={index === 0} />
-        {/* <Section currentStateActive={index === 1} /> */}
+        <Section currentStateActive={index === 1} />
+        <div className="add-education">
+          <button>Add Education</button>
+        </div>
       </div>
     );
   }

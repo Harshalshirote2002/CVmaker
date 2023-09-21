@@ -77,6 +77,23 @@ form fieldset {
   font-weight: 700;
 }
 
+.button-entry{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.button-entry button{
+  background-color: #e5e7eb;
+  width: 80px;
+  border-radius: 4px;
+}
+
+.button-entry button:hover{
+  cursor: pointer;
+}
+
 input {
   /* outline: 1px solid black; */
   padding-left: 0.4em;
@@ -145,6 +162,8 @@ textarea:focus {
 
 .education-expanded,
 .experience-expanded {
+  display: flex;
+  flex-direction: column;
   transform-origin: top center;
   animation: expand 0.2s ease-out;
 }
@@ -205,7 +224,7 @@ textarea:focus {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5em;
-  background-color: #475569;
+  background-color: #082f49;
   color: white;
 }
 
@@ -322,4 +341,47 @@ textarea:focus {
   100% {
     transform: scaleX(100%);
   }
+}
+
+/* ////////////////////////////////////////////// */
+.experience-inactive-section,
+.education-inactive-section{
+  background-color: white;
+  border-radius: var(--input-border-radius);
+  font-family: input-head;
+  font-size: 1em;
+  padding: var(--input-padding-top) var(--input-padding-sidewise);
+}
+
+.add-education,
+.add-experience{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: var(--input-padding-top) var(--input-padding-sidewise);
+}
+
+.add-education button::before,
+.add-experience button::before{
+  content: "+";
+  font-weight: 900;
+  font-size: 1.3em;
+}
+
+.add-education button,
+.add-experience button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.5em;
+  width: max-content;
+  border-radius: var(--input-border-radius);
+  font-size: 1em;
+}
+
+.add-education button:hover,
+.add-experience button:hover{
+  cursor: pointer;
 }

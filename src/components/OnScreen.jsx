@@ -3,7 +3,7 @@ import "../styles/App.css";
 import Info from "./personalInfo.jsx";
 import Experience from "./experience";
 import Education from "./education";
-import Resume from "./resume";
+import Resume from "./demoResume";
 import reset from "../icons/reset.svg";
 import sync from "../icons/sync.svg";
 import print from "../icons/print.svg";
