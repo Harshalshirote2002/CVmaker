@@ -31,13 +31,15 @@
 }
 
 .on-screen {
-  background-color: white;
+  /* background-color: white; */
+  background-color: #e5e7eb;
   display: grid;
-  grid-template-columns: 1fr 10fr;
+  width: 100%;
+  grid-template-columns: 1fr 3fr;
 }
 
 .input {
-  width: 20em;
+  min-width: 16em;
   background-color: #e5e7eb;
   display: flex;
   flex-direction: column;
@@ -176,18 +178,18 @@ textarea:focus {
   padding-left: 0;
   gap: 1em;
 }
-
+/* 
 .controls {
   z-index: 10;
   width: 2em;
   padding-top: 1em;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* justify-content: space-between; */
-  gap: 1em;
-}
-
+  align-items: center; */
+/* justify-content: space-between; */
+/* gap: 1em; */
+/* } */
+/* 
 .controls .control {
   display: flex;
   gap: 2px;
@@ -198,22 +200,23 @@ textarea:focus {
   transition: all 0.2s ease-in-out;
   position: fixed;
   top: 50%;
-}
+} */
 
-.controls .control:hover {
+/* .controls .control:hover {
   box-shadow: 2px 2px 4px rgb(88, 88, 88);
   transform: scale(1.1);
   cursor: pointer;
-}
+} */
 
-.controls .control img {
+/* .controls .control img {
   width: 30px;
-}
+} */
 
 .output-resume {
   height: 100%;
   width: 100%;
   min-width: 650px;
+  max-width: 950px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -411,15 +414,143 @@ textarea:focus {
   cursor: pointer;
 }
 
+.controls {
+  display: none;
+}
+
 @media print {
   .input {
     display: none;
   }
-
-  .controls {
+  .output-viewing .controls {
+    display: none;
+  }
+  .controls{
     display: none;
   }
   .output {
     padding: 0;
   }
+}
+
+@media (max-width: 1024px) {
+  .input {
+    min-width: 200px;
+    padding: 12px;
+    font-size: 14px;
+  }
+  h3 {
+    font-size: 14px;
+  }
+  img {
+    max-width: 16px;
+  }
+  .output {
+    padding: 12px;
+    padding-left: 0;
+  }
+  .output-resume {
+    min-width: 550px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .output-resume {
+    min-width: 500px;
+    font-size: 16px;
+  }
+  * {
+    font-size: 12px;
+  }
+  .input {
+    min-width: 160px;
+  }
+  img {
+    max-width: 13px;
+  }
+  .output-resume {
+    min-width: 380px;
+  }
+}
+
+@media (max-width: 552px) {
+  .output-resume {
+    display: none;
+  }
+  * {
+    font-size: 18px;
+  }
+  .on-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  img {
+    max-width: 22px;
+  }
+  .input {
+    width: 100%;
+  }
+  .output {
+    width: 100%;
+  }
+  .controls {
+    background-color: white;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+  }
+  .controls img {
+    min-width: 32px;
+    transition: 0.2s ease-in-out;
+  }
+  .controls img:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+}
+
+.output-viewing {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  padding: 1px;
+}
+
+.output-viewing .output-resume {
+  display: flex;
+  z-index: 10;
+  min-height: 700px;
+  min-width: 300px;
+}
+
+.output-viewing .output-resume div {
+  padding: 4px;
+  font-size: 8px;
+}
+.output-viewing .output-resume span {
+  font-size: 6px;
+}
+.output-viewing h3 {
+  font-size: 10px;
+}
+.output-viewing .controls {
+  box-shadow: 0 2px 4px black;
+  z-index: 20;
+}
+
+.output-viewing .resume-experience-duration,
+.output-viewing .resume-education-duration{
+  min-width: 80px;
 }

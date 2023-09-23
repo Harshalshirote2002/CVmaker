@@ -5,6 +5,9 @@ import Info from "./personalInfo.jsx";
 import Experience from "./experience";
 import Education from "./education";
 import ActualResume from "./resume";
+import view from "../icons/view.svg";
+import hide from "../icons/hide.svg";
+// import download from '../icons/download.svg';
 
 let personalInfo = {
   name: "John Doe",
@@ -47,6 +50,7 @@ let eduData = [
 ];
 
 function OnScreen() {
+  const [isView, setView] = useState(false);
   const [currentState, setState] = useState(0);
   const [formState, setFormState] = useState(0);
   const [expState, setExpState] = useState(0);
@@ -63,44 +67,70 @@ function OnScreen() {
     expData = updatedInfo;
     setExpState(expState + 1);
   };
-  return (
-    <div className="on-screen">
-      <div className="input">
-        <Info currentState={formState} onUpdate={handleUpdate} />
-        <Experience
-          onShow={() => {
-            if (currentState === 1) {
-              setState(0);
-            } else {
-              setState(1);
-            }
-          }}
-          onUpdate={handleExpUpdate}
-          expData={expData}
-          isActive={currentState === 1}
-        />
-        <Education
-          onShow={() => {
-            if (currentState === 2) {
-              setState(0);
-            } else {
-              setState(2);
-            }
-          }}
-          onUpdate={handleEduUpdate}
-          eduData={eduData}
-          isActive={currentState === 2}
-        />
+  if (!isView) {
+    return (
+      <div className="on-screen">
+        <div className="input">
+          <Info currentState={formState} onUpdate={handleUpdate} />
+          <Experience
+            onShow={() => {
+              if (currentState === 1) {
+                setState(0);
+              } else {
+                setState(1);
+              }
+            }}
+            onUpdate={handleExpUpdate}
+            expData={expData}
+            isActive={currentState === 1}
+          />
+          <Education
+            onShow={() => {
+              if (currentState === 2) {
+                setState(0);
+              } else {
+                setState(2);
+              }
+            }}
+            onUpdate={handleEduUpdate}
+            eduData={eduData}
+            isActive={currentState === 2}
+          />
+        </div>
+        <div className="output">
+          <ActualResume
+            personalInfo={personalInfo}
+            expData={expData}
+            eduData={eduData}
+          />
+          <div className="controls">
+            <img
+              src={view}
+              alt="view pdf"
+              onClick={() => {
+                setView(true);
+              }}
+            />
+          </div>
+        </div>
       </div>
-      <div className="output">
-        <ActualResume
-          personalInfo={personalInfo}
-          expData={expData}
-          eduData={eduData}
-        />
+    );
+  } else {
+    return (
+      <div className="on-screen">
+        <div className="output-viewing">
+          <ActualResume
+            personalInfo={personalInfo}
+            expData={expData}
+            eduData={eduData}
+          />
+          <div className="controls">
+            <img src={hide} alt="hide pdf" onClick={() => setView(false)} />
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default OnScreen;
