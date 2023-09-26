@@ -1,8 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
-import myIcon from "../icons/exp.svg";
-import myIcon2 from "../icons/showMore.svg";
-import myIcon3 from "../icons/showLess.svg";
 import editIcon from "../icons/edit.svg";
 import deleteIcon from "../icons/delete.svg";
 
@@ -19,7 +16,7 @@ function AddExp({ onCancel, onConfirm, expData }) {
     onConfirm(formData);
   };
   return (
-    <div>
+    <div className="entries-expanded">
       <div className="entry">
         <label htmlFor="company-name">Name</label>
         <input
@@ -86,7 +83,7 @@ function EditExp({ onCancel, onConfirm, id, expData }) {
     onConfirm(formData, formData.id);
   };
   return (
-    <div>
+    <div className="entries-expanded">
       <div className="entry">
         <label htmlFor="company-name">Name</label>
         <input
@@ -173,24 +170,11 @@ function OldExps({ data, setIndex, onUpdate }) {
 export default function Experience({ onShow, isActive, expData, onUpdate }) {
   const [index, setIndex] = useState(0);
   if (!isActive) {
-    return (
-      <h3 onClick={onShow} className="experience-head-collapsed">
-        {" "}
-        <img src={myIcon} />
-        Experience
-        <img src={myIcon2} />
-      </h3>
-    );
+    return;
   } else {
     if (index === 0) {
       return (
-        <div className="experience-expanded">
-          <h3 onClick={onShow} className="experience-head-expanded">
-            {" "}
-            <img src={myIcon} />
-            Experience
-            <img src={myIcon3} />
-          </h3>
+        <div className="container-expanded">
           <OldExps data={expData} setIndex={setIndex} onUpdate={onUpdate} />
           <div className="add-experience">
             <button onClick={() => setIndex(1)}>Add Experience</button>
@@ -204,13 +188,7 @@ export default function Experience({ onShow, isActive, expData, onUpdate }) {
         setIndex(0);
       };
       return (
-        <div className="experience-expanded">
-          <h3 onClick={onShow} className="experience-head-expanded">
-            {" "}
-            <img src={myIcon} />
-            Experience
-            <img src={myIcon3} />
-          </h3>
+        <div className="container-expanded">
           <AddExp
             onCancel={() => setIndex(0)}
             onConfirm={handleConfirm}
@@ -229,13 +207,7 @@ export default function Experience({ onShow, isActive, expData, onUpdate }) {
         setIndex(0);
       };
       return (
-        <div className="experience-expanded">
-          <h3 onClick={onShow} className="experience-head-expanded">
-            {" "}
-            <img src={myIcon} />
-            Experience
-            <img src={myIcon3} />
-          </h3>
+        <div className="container-expanded">
           <EditExp
             onCancel={() => setIndex(0)}
             onConfirm={handleConfirm}

@@ -7,7 +7,50 @@ import Education from "./education";
 import ActualResume from "./resume";
 import view from "../icons/view.svg";
 import hide from "../icons/hide.svg";
+import expIcon from "../icons/exp.svg";
+import eduIcon from "../icons/edu.svg";
+import myIcon2 from "../icons/showMore.svg";
 // import download from '../icons/download.svg';
+
+function ExperienceHeader({ onShow, isActive }) {
+  if (isActive) {
+    return (
+      <h3 className="section-head section-head-expanded">
+        <img src={expIcon} />
+        Experience
+        <img onClick={onShow} src={myIcon2} />
+      </h3>
+    );
+  } else {
+    return (
+      <h3 className="section-head">
+        <img src={expIcon} />
+        Experience
+        <img onClick={onShow} src={myIcon2} />
+      </h3>
+    );
+  }
+}
+
+function EducationHeader({ onShow, isActive }) {
+  if (isActive) {
+    return (
+      <h3 className="section-head section-head-expanded">
+        <img src={eduIcon} />
+        Education
+        <img onClick={onShow} src={myIcon2} />
+      </h3>
+    );
+  } else {
+    return (
+      <h3 className="section-head">
+        <img src={eduIcon} />
+        Education
+        <img onClick={onShow} src={myIcon2} />
+      </h3>
+    );
+  }
+}
 
 let personalInfo = {
   name: "John Doe",
@@ -67,35 +110,44 @@ function OnScreen() {
     expData = updatedInfo;
     setExpState(expState + 1);
   };
+  const handleShow1 = () => {
+    if (currentState === 1) {
+      setState(0);
+    } else {
+      setState(1);
+    }
+  };
+  const handleShow2 = () => {
+    if (currentState === 2) {
+      setState(0);
+    } else {
+      setState(2);
+    }
+  };
   if (!isView) {
     return (
       <div className="on-screen">
         <div className="input">
           <Info currentState={formState} onUpdate={handleUpdate} />
-          <Experience
-            onShow={() => {
-              if (currentState === 1) {
-                setState(0);
-              } else {
-                setState(1);
-              }
-            }}
-            onUpdate={handleExpUpdate}
-            expData={expData}
-            isActive={currentState === 1}
-          />
-          <Education
-            onShow={() => {
-              if (currentState === 2) {
-                setState(0);
-              } else {
-                setState(2);
-              }
-            }}
-            onUpdate={handleEduUpdate}
-            eduData={eduData}
-            isActive={currentState === 2}
-          />
+          <div className="experience-section">
+            <ExperienceHeader
+              onShow={handleShow1}
+              isActive={currentState === 1}
+            />
+            <Experience
+              onUpdate={handleExpUpdate}
+              expData={expData}
+              isActive={currentState === 1}
+            />
+          </div>
+          <div className="education-section">
+            <EducationHeader onShow={handleShow2} isActive={currentState === 2} />
+            <Education
+              onUpdate={handleEduUpdate}
+              eduData={eduData}
+              isActive={currentState === 2}
+            />
+          </div>
         </div>
         <div className="output">
           <ActualResume

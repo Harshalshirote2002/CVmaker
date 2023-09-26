@@ -1,8 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
-import myIcon from "../icons/edu.svg";
-import myIcon2 from "../icons/showMore.svg";
-import myIcon3 from "../icons/showLess.svg";
 import editIcon from "../icons/edit.svg";
 import deleteIcon from "../icons/delete.svg";
 
@@ -19,7 +16,7 @@ function AddEducation({ onCancel, onConfirm, eduData }) {
     onConfirm(formData);
   };
   return (
-    <div>
+    <div className="entries-expanded">
       <div className="entry">
         <label htmlFor="education-name">School/College Name</label>
         <input
@@ -92,7 +89,7 @@ function EditEdu({ onCancel, onConfirm, id, eduData, onUpdate }) {
     onConfirm(formData, formData.id);
   };
   return (
-    <div>
+    <div className="entries-expanded">
       <div className="entry">
         <label htmlFor="education-name">School/College Name</label>
         <input
@@ -185,24 +182,11 @@ function OldEdus({ data, setIndex, onUpdate }) {
 export default function Education({ onShow, isActive, eduData, onUpdate }) {
   const [index, setIndex] = useState(0);
   if (!isActive) {
-    return (
-      <h3 onClick={onShow} className="education-head-collapsed">
-        {" "}
-        <img src={myIcon} />
-        Education
-        <img src={myIcon2} />
-      </h3>
-    );
+    return;
   } else {
     if (index === 0) {
       return (
-        <div className="education-expanded">
-          <h3 onClick={onShow} className="education-head-expanded">
-            {" "}
-            <img src={myIcon} />
-            Education
-            <img src={myIcon3} />
-          </h3>
+        <div className="container-expanded">
           <OldEdus data={eduData} setIndex={setIndex} onUpdate={onUpdate} />
           <div className="add-education">
             <button
@@ -222,13 +206,7 @@ export default function Education({ onShow, isActive, eduData, onUpdate }) {
         setIndex(0);
       };
       return (
-        <div className="education-expanded">
-          <h3 onClick={onShow} className="education-head-expanded">
-            {" "}
-            <img src={myIcon} />
-            Education
-            <img src={myIcon3} />
-          </h3>
+        <div className="container-expanded">
           <AddEducation
             onCancel={() => setIndex(0)}
             onConfirm={handleConfirm}
@@ -247,13 +225,7 @@ export default function Education({ onShow, isActive, eduData, onUpdate }) {
         setIndex(0);
       };
       return (
-        <div className="education-expanded">
-          <h3 onClick={onShow} className="education-head-expanded">
-            {" "}
-            <img src={myIcon} />
-            Education
-            <img src={myIcon3} />
-          </h3>
+        <div className="container-expanded">
           <EditEdu
             onCancel={() => setIndex(0)}
             onConfirm={handleConfirm}
