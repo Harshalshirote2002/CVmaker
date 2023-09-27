@@ -165,6 +165,7 @@ textarea:focus {
 }
 
 .entries-expanded{
+  border-radius: var(--input-border-radius);
   padding: 0.2em 0;
   background-color: white;
   transform-origin: top center;
@@ -398,6 +399,7 @@ textarea:focus {
 
 .add-education button,
 .add-experience button {
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
