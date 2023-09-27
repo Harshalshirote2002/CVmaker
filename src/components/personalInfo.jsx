@@ -1,13 +1,4 @@
-import { useState } from "react";
-
 export default function Info({ currentState, onUpdate }) {
-  const [formData, setFormData] = useState({
-    name: "John Doe",
-  title: "Software Developer",
-  mail: "jondoe@coolmail.com",
-  phone: "9999999999",
-  address: "london, UK",
-  });
   return (
     <div className="input-details">
       <form action="#">
@@ -15,11 +6,9 @@ export default function Info({ currentState, onUpdate }) {
         <div className="entry">
           <label htmlFor="input-name">Full name</label>
           <input
+            value={currentState.name}
             onChange={(e) => {
-              setFormData({ ...formData, name: e.target.value });
-              // personalInfo = formData;
-              // console.log(e.target.value)
-              onUpdate({ ...formData, name: e.target.value });
+              onUpdate({ ...currentState, name: e.target.value });
             }}
             className="input-name"
             id="input-name"
@@ -29,10 +18,9 @@ export default function Info({ currentState, onUpdate }) {
         <div className="entry">
           <label htmlFor="input-title">Job title</label>
           <input
+            value={currentState.title}
             onChange={(e) => {
-              setFormData({ ...formData, title: e.target.value });
-              // personalInfo = formData;
-              onUpdate({ ...formData, title: e.target.value });
+              onUpdate({ ...currentState, title: e.target.value });
             }}
             className="input-title"
             id="input-title"
@@ -42,10 +30,9 @@ export default function Info({ currentState, onUpdate }) {
         <div className="entry">
           <label htmlFor="input-mail">Email</label>
           <input
+            value={currentState.mail}
             onChange={(e) => {
-              setFormData({ ...formData, mail: e.target.value });
-              // personalInfo = formData;
-              onUpdate({ ...formData, mail: e.target.value });
+              onUpdate({ ...currentState, mail: e.target.value });
             }}
             className="input-mail"
             id="input-mail"
@@ -55,10 +42,9 @@ export default function Info({ currentState, onUpdate }) {
         <div className="entry">
           <label htmlFor="input-phone">Phone number</label>
           <input
+            value={currentState.phone}
             onChange={(e) => {
-              setFormData({ ...formData, phone: e.target.value });
-              // personalInfo = formData;
-              onUpdate({ ...formData, phone: e.target.value });
+              onUpdate({ ...currentState, phone: e.target.value });
             }}
             className="input-phone"
             id="input-phone"
@@ -68,10 +54,9 @@ export default function Info({ currentState, onUpdate }) {
         <div className="entry">
           <label htmlFor="input-address">Address</label>
           <input
+            value={currentState.address}
             onChange={(e) => {
-              setFormData({ ...formData, address: e.target.value });
-              // personalInfo = formData;
-              onUpdate({ ...formData, address: e.target.value });
+              onUpdate({ ...currentState, address: e.target.value });
             }}
             className="input-address"
             id="input-address"

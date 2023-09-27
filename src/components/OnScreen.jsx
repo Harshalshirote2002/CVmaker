@@ -10,7 +10,6 @@ import hide from "../icons/hide.svg";
 import expIcon from "../icons/exp.svg";
 import eduIcon from "../icons/edu.svg";
 import myIcon2 from "../icons/showMore.svg";
-// import download from '../icons/download.svg';
 
 function ExperienceHeader({ onShow, isActive }) {
   if (isActive) {
@@ -95,20 +94,18 @@ let eduData = [
 function OnScreen() {
   const [isView, setView] = useState(false);
   const [currentState, setState] = useState(0);
-  const [formState, setFormState] = useState(0);
-  const [expState, setExpState] = useState(0);
-  const [eduState, setEduState] = useState(0);
+  const [formState, setFormState] = useState(personalInfo);
+  const [eduState, setEduState] = useState(eduData);
+  const [expDataState, setExpDataState] = useState(expData);
+
   const handleUpdate = (updatedInfo) => {
-    personalInfo = updatedInfo;
-    setFormState(formState + 1);
+    setFormState(updatedInfo);
   };
   const handleEduUpdate = (updatedInfo) => {
-    eduData = updatedInfo;
-    setEduState(eduState + 1);
+    setEduState(updatedInfo);
   };
   const handleExpUpdate = (updatedInfo) => {
-    expData = updatedInfo;
-    setExpState(expState + 1);
+    setExpDataState(updatedInfo);
   };
   const handleShow1 = () => {
     if (currentState === 1) {
@@ -136,24 +133,27 @@ function OnScreen() {
             />
             <Experience
               onUpdate={handleExpUpdate}
-              expData={expData}
+              expData={expDataState}
               isActive={currentState === 1}
             />
           </div>
           <div className="education-section">
-            <EducationHeader onShow={handleShow2} isActive={currentState === 2} />
+            <EducationHeader
+              onShow={handleShow2}
+              isActive={currentState === 2}
+            />
             <Education
               onUpdate={handleEduUpdate}
-              eduData={eduData}
+              eduData={eduState}
               isActive={currentState === 2}
             />
           </div>
         </div>
         <div className="output">
           <ActualResume
-            personalInfo={personalInfo}
-            expData={expData}
-            eduData={eduData}
+            personalInfo={formState}
+            expData={expDataState}
+            eduData={eduState}
           />
           <div className="controls">
             <img
@@ -172,9 +172,9 @@ function OnScreen() {
       <div className="on-screen">
         <div className="output-viewing">
           <ActualResume
-            personalInfo={personalInfo}
-            expData={expData}
-            eduData={eduData}
+            personalInfo={formState}
+            expData={expDataState}
+            eduData={eduState}
           />
           <div className="controls">
             <img src={hide} alt="hide pdf" onClick={() => setView(false)} />

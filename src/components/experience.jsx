@@ -153,12 +153,7 @@ function OldExps({ data, setIndex, onUpdate }) {
           <img
             src={deleteIcon}
             onClick={() => {
-              for (let i = 0; i < data.length; i++) {
-                if (data[i].id === item.id) {
-                  data.splice(i, 1);
-                  onUpdate(data);
-                }
-              }
+              onUpdate(data.filter((record) => record.id !== item.id));
             }}
           />
         </div>
@@ -183,8 +178,8 @@ export default function Experience({ onShow, isActive, expData, onUpdate }) {
       );
     } else if (index === 1) {
       const handleConfirm = (confirmedData) => {
-        expData.push(confirmedData);
-        onUpdate(expData);
+        const newData = [...expData, confirmedData];
+        onUpdate(newData);
         setIndex(0);
       };
       return (
@@ -198,12 +193,13 @@ export default function Experience({ onShow, isActive, expData, onUpdate }) {
       );
     } else if (index !== 1 || index !== 0) {
       const handleConfirm = (formData, id) => {
-        for (let i = 0; i < expData.length; i++) {
-          if (expData[i].id === id) {
-            expData[i] = formData;
+        const newData = expData.slice();
+        for (let i = 0; i < newData.length; i++) {
+          if (newData[i].id === id) {
+            newData[i] = formData;
           }
         }
-        onUpdate(expData);
+        onUpdate(newData);
         setIndex(0);
       };
       return (

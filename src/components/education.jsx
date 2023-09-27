@@ -164,12 +164,7 @@ function OldEdus({ data, setIndex, onUpdate }) {
           <img src={editIcon} onClick={() => setIndex(item.id)} />
           <img
             onClick={() => {
-              for (let i = 0; i < data.length; i++) {
-                if (data[i].id === item.id) {
-                  data.splice(i, 1);
-                  onUpdate(data);
-                }
-              }
+              onUpdate(data.filter((record) => record.id !== item.id));
             }}
             src={deleteIcon}
           />
@@ -201,8 +196,8 @@ export default function Education({ onShow, isActive, eduData, onUpdate }) {
       );
     } else if (index === 1) {
       const handleConfirm = (confirmedData) => {
-        eduData.push(confirmedData);
-        onUpdate(eduData);
+        const newData = [...eduData, confirmedData];
+        onUpdate(newData);
         setIndex(0);
       };
       return (
@@ -216,12 +211,13 @@ export default function Education({ onShow, isActive, eduData, onUpdate }) {
       );
     } else {
       const handleConfirm = (formData, id) => {
+        const newData = eduData.slice();
         for (let i = 0; i < eduData.length; i++) {
-          if (eduData[i].id === id) {
-            eduData[i] = formData;
+          if (newData[i].id === id) {
+            newData[i] = formData;
           }
         }
-        onUpdate(eduData);
+        onUpdate(newData);
         setIndex(0);
       };
       return (
